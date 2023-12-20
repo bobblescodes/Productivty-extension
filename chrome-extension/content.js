@@ -1,3 +1,5 @@
+// content.js
+
 // Function to blur elements
 function blurElements() {
   const elementsToBlur = document.querySelectorAll('ytd-browse.style-scope.ytd-page-manager, div#secondary.style-scope.ytd-watch-flexy');
@@ -30,16 +32,18 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.action === 'toggleWebScraper') {
     // Toggle the web scraper function
     toggleWebScraper(request.enabled);
+  } else if (request.action === 'saveWebScraperState') {
+    // Save the state of the web scraper function before the tab is closed
+    const toggleSwitch = document.querySelector('input[id="toggleSwitch"]');
+    const enabled = toggleSwitch ? toggleSwitch.checked : false;
+
+    chrome.storage.sync.set({ scraperEnabled: enabled }, function() {
+      if (chrome.runtime.lastError) {
+        // Handle the error, if any
+        console.error(chrome.runtime.lastError);
+      }
+    });
   }
-});
-
-// Listen for the unload event on the page
-window.addEventListener('unload', function() {
-  // Save the state of the web scraper function before unloading the page
-  const toggleSwitch = document.querySelector('input[id="toggleSwitch"]');
-  const enabled = toggleSwitch ? toggleSwitch.checked : false;
-
-  chrome.storage.sync.set({ scraperEnabled: enabled });
 });
 
 // Retrieve the stored state and apply the web scraper function on page load

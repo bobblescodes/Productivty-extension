@@ -18,7 +18,9 @@
     "activeTab",
     "storage"  // Add this line to include storage permission
   ],
-
+  "background": {
+    "service_worker": "background.js"
+  },
   "icons": {
     "16": "icon.png",
     "48": "icon.png",

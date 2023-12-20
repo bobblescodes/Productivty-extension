@@ -4,27 +4,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Retrieve the stored state and update the toggle button and text
   chrome.storage.sync.get({ scraperEnabled: false }, function(data) {
-    toggleSwitch.checked = data.scraperEnabled;
-    updateStatusText();
+    const storedEnabledState = data.scraperEnabled;
+    toggleSwitch.checked = storedEnabledState;
+    updateStatusText(storedEnabledState);
   });
 
   toggleSwitch.addEventListener('change', function() {
+    const enabled = toggleSwitch.checked;
+
+    // Update the storage with the new state
+    chrome.storage.sync.set({ scraperEnabled: enabled });
+
+    // Send a message to the content script to toggle the web scraper function
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
       const tabId = tabs[0].id;
-      const enabled = toggleSwitch.checked;
-
-      // Update the storage with the new state
-      chrome.storage.sync.set({ scraperEnabled: enabled });
-
-      // Send a message to the content script to toggle the web scraper function
       chrome.tabs.sendMessage(tabId, { action: 'toggleWebScraper', enabled });
-
-      // Update the status text
-      updateStatusText();
     });
+
+    // Update the status text
+    updateStatusText(enabled);
   });
 
-  function updateStatusText() {
-    statusText.textContent = toggleSwitch.checked ? 'Enabled' : 'Disabled';
+  function updateStatusText(enabled) {
+    statusText.textContent = enabled ? 'Enabled' : 'Disabled';
   }
 });
