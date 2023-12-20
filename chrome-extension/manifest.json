@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Productivity Helper",
+  "version": "1.0",
+  "description": "Use this extension to blur out the distracting reccomended videos so that you can search for the educational/helpful videos you want",
+
+  "action": {
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    },
+    "default_title": "Web Scraper Extension",
+    "default_popup": "index.html"
+  },
+
+  "permissions": [
+    "activeTab",
+    "storage"  // Add this line to include storage permission
+  ],
+
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
