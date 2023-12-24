@@ -2,7 +2,7 @@
 
 // Function to blur elements
 function blurElements() {
-  const elementsToBlur = document.querySelectorAll('ytd-browse.style-scope.ytd-page-manager, div#secondary.style-scope.ytd-watch-flexy');
+  const elementsToBlur = document.querySelectorAll('ytd-browse.style-scope.ytd-page-manager, div#related.style-scope.ytd-watch-flexy');
 
   elementsToBlur.forEach((element) => {
     element.style.filter = 'blur(100px)';
@@ -11,7 +11,7 @@ function blurElements() {
 
 // Function to unblur elements
 function unblurElements() {
-  const elementsToUnblur = document.querySelectorAll('ytd-browse.style-scope.ytd-page-manager, div#secondary.style-scope.ytd-watch-flexy');
+  const elementsToUnblur = document.querySelectorAll('ytd-browse.style-scope.ytd-page-manager, div#related.style-scope.ytd-watch-flexy');
 
   elementsToUnblur.forEach((element) => {
     element.style.filter = 'none';
@@ -29,7 +29,7 @@ function toggleWebScraper(enabled) {
 
 // Listen for the message from the popup
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.action === 'toggleWebScraper') {
+  if (request.action === 'toggleWebScraper' && window.location.hostname.includes('youtube')) {
     // Toggle the web scraper function
     toggleWebScraper(request.enabled);
   } else if (request.action === 'saveWebScraperState') {

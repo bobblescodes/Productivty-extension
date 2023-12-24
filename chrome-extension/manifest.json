@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "YouTube Productivity Helper",
+  "name": "YouTube Productivity Filter",
   "version": "1.0",
   "description": "Use this extension to blur out the distracting reccomended videos so that you can search for the educational/helpful videos you want",
 
@@ -10,13 +10,13 @@
       "48": "icon.png",
       "128": "icon.png"
     },
-    "default_title": "Web Scraper Extension",
+    "default_title": "YouTube Productivity Filter",
     "default_popup": "index.html"
   },
 
   "permissions": [
     "activeTab",
-    "storage"  // Add this line to include storage permission
+    "storage"
   ],
   "background": {
     "service_worker": "background.js"
