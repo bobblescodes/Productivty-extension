@@ -1,8 +1,6 @@
-// content.js
-
 // Function to blur elements
 function blurElements() {
-  const elementsToBlur = document.querySelectorAll('ytd-browse.style-scope.ytd-page-manager, div#related.style-scope.ytd-watch-flexy');
+  const elementsToBlur = document.querySelectorAll('ytd-browse.style-scope.ytd-page-manager, div#related.style-scope.ytd-watch-flexy, .ytp-endscreen-content');
 
   elementsToBlur.forEach((element) => {
     element.style.filter = 'blur(100px)';
@@ -11,7 +9,7 @@ function blurElements() {
 
 // Function to unblur elements
 function unblurElements() {
-  const elementsToUnblur = document.querySelectorAll('ytd-browse.style-scope.ytd-page-manager, div#related.style-scope.ytd-watch-flexy');
+  const elementsToUnblur = document.querySelectorAll('ytd-browse.style-scope.ytd-page-manager, div#related.style-scope.ytd-watch-flexy, .ytp-endscreen-content');
 
   elementsToUnblur.forEach((element) => {
     element.style.filter = 'none';

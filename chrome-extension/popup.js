@@ -1,10 +1,3 @@
-// popup.js
-
-// Function to update the status text
-function updateStatusText(enabled) {
-  statusText.textContent = enabled ? 'Enabled' : 'Disabled';
-}
-
 // Add an event listener when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function() {
   // Get the toggle switch and status text elements
@@ -45,22 +38,4 @@ document.addEventListener('DOMContentLoaded', function() {
   function updateStatusText(enabled) {
     statusText.textContent = enabled ? 'Enabled' : 'Disabled';
   }
-});
-
-// Listen for tab activation changes
-chrome.tabs.onActivated.addListener(function(activeInfo) {
-  // Query the active tab to get its URL
-  chrome.tabs.get(activeInfo.tabId, function(tab) {
-      const tabId = tabs[0].id;
-      const enabled = toggleSwitch.checked; // Get the current state from the toggle switch
-      chrome.tabs.sendMessage(tabId, { action: 'toggleWebScraper', enabled });
-
-  });
-});
-
-// Listen for the unload event on the popup
-window.addEventListener('unload', function() {
-  // Save the state of the web scraper function before unloading the popup
-  const enabled = toggleSwitch.checked;
-  chrome.storage.sync.set({ scraperEnabled: enabled });
 });

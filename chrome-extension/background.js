@@ -1,4 +1,3 @@
-// background.js
 chrome.tabs.onRemoved.addListener(function(tabId, removeInfo) {
   // Get information about the removed tab
   chrome.tabs.get(tabId, function(tab) {
@@ -9,14 +8,3 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo) {
     }
   });
 });
-
-chrome.tabs.onUpdated.addListener(
-  function(tabId, changeInfo, tab) {
-    // read changeInfo data and do something with it
-    // like send the new url to contentscripts.js
-    if (changeInfo.url) {
-      chrome.tabs.sendMessage(tabId, { action: 'saveWebScraperState' });
-    }
-  }
-);
-
